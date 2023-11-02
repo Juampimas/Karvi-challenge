@@ -1,8 +1,28 @@
 aside{
     margin: 0 3em;
     height: 100%;
-    min-width: 20em ;
+    max-width: 25em ;
     padding: 1em;
+    
+    .filter_buttons_container{
+        display: none;
+        justify-content: space-between;
+        align-items: center;
+        .filter_name{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            span{
+                font-weight: 700;
+                color: #566DED;
+            }
+        }
+    }
+    form{
+        display: none;
+    }
     .car-filter{
         position: relative;
         width: 100%;
@@ -63,6 +83,61 @@ aside{
             justify-content: space-between;
             align-items: center;
             padding: 1.5em 0  ;
+        }
+    }
+}
+
+
+@media only screen and (max-width: 800px){
+    aside{
+        margin: 0;
+        height: 100%;
+        min-width: 100% ;
+        padding: 1em;
+        .filter_buttons_container{
+            margin-bottom: 1em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .filter_name{
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 5px;
+                span{
+                    font-weight: 700;
+                    color: #566DED;
+                }
+            }
+        }
+        .show-filters.inactive{
+            display: none;
+        }
+        .show-search.active{
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            input{
+                height: 2.5em;
+                border: 2px solid #566DED;
+                border-radius: 5px;
+                padding: 0 10px;
+                width: 80%;
+            }
+            button{
+                height: 2.5em;
+                border: 2px solid #566DED;
+                border-radius: 5px;
+                padding: 0 10px;
+                width: 20%;
+                color: #566DED;
+                font-weight: 700;
+            }
+        }
+        .show-search.inactive{
+            display: none;
         }
     }
 }

@@ -6,6 +6,7 @@
     align-items: center;
     ul{
         height: 100%;
+        width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -49,6 +50,19 @@
         p{
             font-size: 16px;
             color: #5F647A;
+        }
+    }
+}
+
+@media only screen and (max-width: 800px){
+    .page_flex{
+        ul{
+            .page_number.active{
+                display: none;
+            }
+            .page_number.inactive{
+                display: none;
+            }
         }
     }
 }

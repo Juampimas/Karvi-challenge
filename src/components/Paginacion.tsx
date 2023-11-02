@@ -1,7 +1,7 @@
 import "../sass/Paginacion.scss"
 import left_arrow from "../assets/left_arrow.svg"
 import right_arrow from "../assets/right_arrow.svg"
-// import { useEffect } from "react"
+
 
 interface Pages {
     currPage: number,
@@ -35,9 +35,9 @@ function Paginacion({currPage, setPage, numPages}:Pages) {
                 pagNums.push(index + 1);        
             }
         }
-        return pagNums.map((pag) => (
+        return (pagNums.map((pag) => (
             <li onClick={() => {setPage(pag)}} className={`page_number ${pag===currPage ? "active" : "inactive"}`} key={crypto.randomUUID()}>{pag}</li>
-        ))
+        )))
     }
     
   return (

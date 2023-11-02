@@ -2,7 +2,7 @@
 import "../sass/ListaDeProductos.scss"
 import button_icon from "../assets/card_button_icon.svg"
 import favourite_icon from "../assets/favourite_icon.svg"
-import favourite_icon_blue from "../assets/favourite_icon_blue.svg"
+// import favourite_icon_blue from "../assets/favourite_icon_blue.svg"
 import { useState } from "react"
 import Paginacion from "./Paginacion"
 
@@ -31,10 +31,12 @@ interface Autos {
     mileage: number,
     state: string,
     image: string
-  }>
+  }>,
+  grid:boolean, 
+  setGrid: (grid: boolean) => void
 }
 
-function ListaDeProductos({autosFiltrados}:Autos) {
+function ListaDeProductos({autosFiltrados, grid}:Autos) {
   
   // const chev = autosFiltrados.filter((car) => {return car.brand === "CHEVROLET"})
   const [autosQt] = useState(12)
@@ -49,9 +51,13 @@ function ListaDeProductos({autosFiltrados}:Autos) {
 
   return (
     <div className="card-container">
-      <ul className="card-list">
+      <ul className={`card-list ${grid ? "active" : "inactive"}`} /*className="card-list"*/>
 
-        {autosFiltrados.slice(indexIni,indexFin).map((e) => (
+        {autosFiltrados.length === 0 
+        ?
+        <p>No se encontraron resultados</p>
+        :
+        autosFiltrados.slice(indexIni,indexFin).map((e) => (
           <li className="card" key={e.id}>
             <div className="card_flex1">
               <button className="favourite-button"><img src={favourite_icon} alt="icono corazon" /></button>

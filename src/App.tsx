@@ -4,7 +4,7 @@ import { useState } from "react"
 import './App.scss'
 import Filtros from './components/Filtros';
 import Busqueda from './components/Busqueda';
-import { useFilters } from './hooks/useFilters';
+// import { useFilters } from './hooks/useFilters';
 
 
 const ESTADO_INICIAL = productos.items;
@@ -79,14 +79,15 @@ function App() {
     // const filterProducts = filteredProducts(productos)
 
     const [tags, setTags] = useState([])
+    const [grid, setGrid] = useState(true)
     
 
   return (
     <main>   
       <Filtros tags={tags} setTags={setTags} />
       <section>
-        <Busqueda autos={autos} tags={tags} setTags={setTags} setAutos={setAutos}/>
-        <ListaDeProductos autosFiltrados={autos} />
+        <Busqueda autos={autos} tags={tags} setTags={setTags} setAutos={setAutos} grid={grid} setGrid={setGrid} initialCars={ESTADO_INICIAL}/>
+        <ListaDeProductos autosFiltrados={autos} grid={grid} setGrid={setGrid} />
       </section>
     </main>
   )

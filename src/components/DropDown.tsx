@@ -36,9 +36,12 @@ function DropDownItem({title,subFilter, yearFilter, tags, setTags}:SubTitle){
                 </div>
                 <div className={`dropdown_content ${open ? "active" : "inactive"}`}>
                     <ul className="dropdown_sub">
-                        {subFilter ? subFilter.map((sub) => (
+                        {subFilter 
+                        ? 
+                        subFilter.map((sub) => (
                             <li onClick={() => {addFilter(sub.name)}} key={crypto.randomUUID()} className="dropdown_li">{sub.name} ({sub.count})</li>
-                        )) : 
+                        )) 
+                        :
                         yearFilter?.map((sub) => (
                             <li onClick={() => {setTags([...tags,sub.name])}} key={crypto.randomUUID()} className="dropdown_li">{sub.name} ({sub.count})</li>
                         ))
