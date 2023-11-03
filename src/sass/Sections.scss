@@ -1,0 +1,33 @@
+.fav_section{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+    margin-bottom: 2em;
+    .fav_btn.active{
+        width: auto;
+        border: none;
+        border-bottom: 3px solid #566DED;
+        padding: 1em 2em;
+        color: #566DED;
+        font-weight: 700;
+        cursor: pointer;
+        &:hover{
+            background-color: rgb(219, 219, 219);
+        }
+    }
+    .fav_btn.inactive{
+        width: auto;
+        border: none;
+        border-bottom: 3px solid #5F647A;
+        padding: 1em 2em;
+        color: #5F647A;
+        font-weight: 700;
+        cursor: pointer;
+        &:hover{
+            background-color: rgb(219, 219, 219);
+        }
+    }
+}

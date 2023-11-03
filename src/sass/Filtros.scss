@@ -1,5 +1,5 @@
 aside{
-    margin: 0 3em;
+    margin: 2em 3em 0;
     height: 100%;
     max-width: 25em ;
     padding: 1em;
@@ -88,7 +88,7 @@ aside{
 }
 
 
-@media only screen and (max-width: 800px){
+@media only screen and (max-width: 900px){
     aside{
         margin: 0;
         height: 100%;

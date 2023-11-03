@@ -1,94 +1,60 @@
-import ListaDeProductos from './components/ListaDeProductos'
-import productos from "./mocks/productos.json"
-import { useState } from "react"
-import './App.scss'
+import { useState, useEffect } from "react"
+
 import Filtros from './components/Filtros';
 import Busqueda from './components/Busqueda';
-// import { useFilters } from './hooks/useFilters';
+import Sections from './components/Sections';
+import Loader from "./components/Loader";
 
+import type { Producto } from "./types/interfaces";
+import './App.scss'
 
-const ESTADO_INICIAL = productos.items;
-// const FILTROS_INICIAL = productos.availableFilters;
-
-
-
-// interface Filters {
-//   filtros: {
-//     brand: Array<{
-//       id:string,
-//       name:string,
-//       count:number
-//     }>,
-//     model: Array<{
-//       id:string,
-//       name:string,
-//       count:number
-//     }>,
-//     version: Array<{
-//       id:string,
-//       name:string,
-//       count:number
-//     }>,
-//     year: Array<{
-//       id:string,
-//       name:string,
-//       count:number
-//     }>,
-//     city: Array<{
-//       id:string,
-//       name:string,
-//       count:number
-//     }>
-//   }
-// }
-interface Producto {
-  id: number,
-  brand: string,
-  model: string, 
-  version: string,
-  year: string,
-  city: string,
-  price: number,
-  mileage: number,
-  state: string,
-  image: string
-}
-// interface Prod {
-//   items: Array<{
-//     id: number,
-//     brand: string,
-//     model: string, 
-//     version: string,
-//     year: string,
-//     city: string,
-//     price: number,
-//     mileage: number,
-//     state: string,
-//     image: string
-//   }>
-// }
 
 
 function App() {
+
+  const [primer, setPrimer] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetch("https://mocki.io/v1/80669021-108d-40c2-9bc9-887a5184b700")
+    .then(res => res.json())
+    .then(data => setPrimer(data.items))
+    .finally(()=>setLoading(false))
+  },[])
   
+  const [autos, setAutos] = useState<Array<Producto>>(primer)
 
-  const [autos, setAutos] = useState<Array<Producto>>(ESTADO_INICIAL)
-  // const [filtros] = useState<Filters["filtros"]>(FILTROS_INICIAL)
-
-    // const {filteredProducts} = useFilters();
-    // const filterProducts = filteredProducts(productos)
-
-    const [tags, setTags] = useState([])
-    const [grid, setGrid] = useState(true)
+  const [tags, setTags] = useState([])
+  const [grid, setGrid] = useState(true)
     
 
   return (
     <main>   
-      <Filtros tags={tags} setTags={setTags} />
-      <section>
-        <Busqueda autos={autos} tags={tags} setTags={setTags} setAutos={setAutos} grid={grid} setGrid={setGrid} initialCars={ESTADO_INICIAL}/>
-        <ListaDeProductos autosFiltrados={autos} grid={grid} setGrid={setGrid} />
-      </section>
+      {
+        loading 
+        ? 
+        <Loader /> 
+        :
+        <>
+          <Filtros 
+            tags={tags} 
+            setTags={setTags} />
+          <section>
+            <Busqueda 
+              autos={autos} 
+              tags={tags} 
+              setTags={setTags} 
+              setAutos={setAutos} 
+              grid={grid} 
+              setGrid={setGrid} 
+              initialCars={primer}/>
+            <Sections 
+              autosFiltrados={autos} 
+              grid={grid} 
+              setGrid={setGrid} />
+          </section>
+        </>
+      }
     </main>
   )
 }

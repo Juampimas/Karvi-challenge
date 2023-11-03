@@ -1,85 +1,25 @@
 import {useState, useEffect} from "react"
-import "../sass/Busqueda.scss"
+
 import cross from "../assets/tags_cross.svg"
 import trash from "../assets/trash_bin.svg"
 import grid_icon from "../assets/grid_icon.svg"
 import sort_icon from "../assets/sort_icon.svg"
 
-interface Busc {
-    autos: Array<{
-      id: number,
-      brand: string,
-      model: string, 
-      version: string,
-      year: string,
-      city: string,
-      price: number,
-      mileage: number,
-      state: string,
-      image: string
-    }>,
-    tags:Array<string | number>,
-    setTags: (tags: Array<string | number>) => void,
-    setAutos: (autos: Array<{
-        id: number,
-        brand: string,
-        model: string, 
-        version: string,
-        year: string,
-        city: string,
-        price: number,
-        mileage: number,
-        state: string,
-        image: string
-      }>) => void,
-      grid:boolean, 
-      setGrid: (grid: boolean) => void,
-      initialCars:Array<{
-        id: number,
-        brand: string,
-        model: string, 
-        version: string,
-        year: string,
-        city: string,
-        price: number,
-        mileage: number,
-        state: string,
-        image: string
-      }>
-  }
+import type { Busqueda } from "../types/interfaces"
+import { useSort } from "../hooks/useSort"
+import "../sass/Busqueda.scss"
 
-function Busqueda({autos, tags, setTags, setAutos, grid, setGrid, initialCars}:Busc) {
+
+
+function Busqueda({autos, tags, setTags, setAutos, grid, setGrid, initialCars}:Busqueda) {
     
-
     useEffect(() => {
         filterCars()
     },[tags])
 
     const [sort, setSort] = useState(false)
 
-    function sortCars(){
-        setSort(!sort)
-        if(sort){
-            setAutos([...autos].sort((a,b) => a.price > b.price ? 1 : -1))
-        } else {
-            setAutos([...autos].sort((a,b) => a.price < b.price ? 1 : -1))
-        }
-    }
-
-    function filterCars(){
-        const newCars = []
-        if(tags.length > 0){
-            tags.forEach(tag=>{
-                autos.forEach(car => {
-                    if(car.brand === tag || car.year.slice(5,9) === tag.toString() || car.version === tag || car.model === tag || car.city === tag || car.year.slice(0,4) === tag.toString()){
-                        newCars.push(car)
-                    } 
-                })
-            })
-            setAutos([...newCars])
-        } else if (tags.length === 0){
-            setAutos(initialCars)
-    }}
+    const {sortCars, filterCars} = useSort({sort, setAutos, autos, setSort, tags, initialCars})
 
 
   return (

@@ -1,5 +1,5 @@
 header{
-    margin: 2em 0;
+    margin: 4em 0 2em;
     width: 100%;
     .tags_container{
         display: flex;
@@ -61,7 +61,7 @@ header{
     }
 }
 
-@media only screen and (max-width: 800px){
+@media only screen and (max-width: 900px){
     header{
         margin: 1em 0;
         padding: 0 1em;

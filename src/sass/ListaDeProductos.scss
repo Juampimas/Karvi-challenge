@@ -108,9 +108,9 @@
     }
 }
 
-@media only screen and (max-width: 800px){
-    /*Tablets [601px -> 1200px]*/
+@media only screen and (max-width: 900px){
     .card-container{
+        min-width: auto;
         .card-list.active{
             margin: 0 1em;
             width: auto;
